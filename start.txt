@@ -1,3 +1,7 @@
-ls -l
-conf-dump
-cd src
+ls
+cd my_files
+ls
+cd images
+cd ..
+ls
+cd /
