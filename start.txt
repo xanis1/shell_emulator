@@ -1,7 +1,0 @@
-ls
-cd my_files
-ls
-cd images
-cd ..
-ls
-cd /

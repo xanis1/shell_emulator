@@ -1,3 +1,3 @@
 @echo off
-py src/emulator.py
+python src/emulatur.py
 pause
