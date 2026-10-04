@@ -1,7 +1,7 @@
-ls
+clear
 cd my_files
 ls
-cd images
-cd ..
+chown admin hello.txt
+rm hello.txt
 ls
-cd /
+chown root missing_file.txt
