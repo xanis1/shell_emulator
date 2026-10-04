@@ -1,0 +1,9 @@
+clear
+pwd
+ls
+cd my_files
+pwd
+ls
+rev hello world
+conf-dump
+cd invalid_directory
