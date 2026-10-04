@@ -83,25 +83,6 @@ def cmd_cd(args, state):
         print(f"Ошибка: директория '{args[0]}' не найдена")
         return False
 
-def cmd_pwd(args, state):
-    """Выводит текущий путь."""
-    print(state['cwd'])
-    return True
-
-def cmd_clear(args, state):
-    """Очищает экран консоли."""
-    os.system('cls' if os.name == 'nt' else 'clear')
-    return True
-
-def cmd_rev(args, state):
-    """Переворачивает переданную строку."""
-    if not args:
-        print("Ошибка: rev ожидает аргументы")
-        return False
-    text = " ".join(args)
-    print(text[::-1])
-    return True
-
 def cmd_conf_dump(config):
     """Вывод параметров конфигурации."""
     for key, value in config.items():
@@ -116,12 +97,6 @@ def execute_command(command, args, config, state):
         return cmd_ls(args, state), True
     elif command == "cd":
         return cmd_cd(args, state), True
-    elif command == "pwd":
-        return cmd_pwd(args, state), True
-    elif command == "clear":
-        return cmd_clear(args, state), True
-    elif command == "rev":
-        return cmd_rev(args, state), True
     elif command == "conf-dump":
         return cmd_conf_dump(config), True
     
@@ -140,7 +115,8 @@ def run_script(script_path, config, state, vfs_name):
                     parsed = shlex.split(line)
                     success, _ = execute_command(parsed[0], 
                                                  parsed[1:], 
-                                                 config, state)
+                                                 config, 
+                                                 state)
                     if not success:
                         print(f"Ошибка исполнения скрипта на строке: {line}")
                         break
@@ -160,9 +136,10 @@ def run_repl(config, state, vfs_name):
             if not user_input: continue
             
             parsed = shlex.split(user_input)
-            _, keep_running = execute_command(parsed[0], 
-                                              parsed[1:], 
-                                              config, state)
+            _, keep_running = execute_command(parsed[0],
+                                               parsed[1:], 
+                                               config, 
+                                               state)
             if not keep_running: break
         except ValueError as e:
             print(f"Ошибка синтаксиса: {e}")
@@ -180,10 +157,7 @@ def main():
     vfs_name = "vfs"
     
     if config["script_path"]:
-        run_script(config["script_path"], 
-                   config, 
-                   state, 
-                   vfs_name)
+        run_script(config["script_path"], config, state, vfs_name)
         
     run_repl(config, state, vfs_name)
 
